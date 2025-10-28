@@ -12,6 +12,7 @@
     </div>
 </div>
 
+
 <table class="table table-hover w-100 mt-5">
     <tr>
         <td>شناسه</td>
@@ -19,6 +20,7 @@
         <td>نام خانوادگی</td>
         <td>موبایل</td>
         <td>شهر</td>
+        <td></td>
     </tr>
     @foreach (var person in @Model)
     {
@@ -28,6 +30,16 @@
             <td>@person.LastName</td>
             <td>@person.PhoneNumber</td>
             <td>@person.CityName</td>
+            <td>
+                <a asp-controller="People" asp-action="Edit" asp-route-id="@person.Id"
+                   class="btn btn-warning">ویرایش</a>
+                
+                <form asp-controller="People" asp-action="Delete" method="post">
+                    <input type="hidden" name="id" value="@person.Id" />
+                    <input type="submit" value="حذف" class="btn btn-danger"/>
+                </form>
+
+            </td>
         </tr>
     }
 </table>
