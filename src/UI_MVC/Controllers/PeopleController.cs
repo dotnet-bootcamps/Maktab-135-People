@@ -6,9 +6,11 @@ namespace UI_MVC.Controllers
 {
     public class PeopleController : Controller
     {
-        public PeopleController()
+        private readonly ILogger<PeopleController> _logger;
+
+        public PeopleController(ILogger<PeopleController> logger)
         {
-            
+            _logger = logger;
         }
 
         public IActionResult Index()

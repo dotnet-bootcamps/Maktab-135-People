@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using UI_MVC.Middlwares;
 using UI_MVC.Models.Database;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,8 +11,11 @@ builder.Services.AddControllersWithViews()
 //builder.Services.AddDbContext<AppDbContext>(optionsBuilder => optionsBuilder.UseSqlServer("asdasdasdasd"));
 
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
+
+app.UseMiddleware<LoggingMiddleware>();
+app.UseMiddleware<IpCheckerMiddleware>();
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
