@@ -1,23 +1,27 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using UI_MVC.Models.Database;
 using UI_MVC.Models.Entities;
+using UI_MVC.Services;
 
 namespace UI_MVC.Controllers
 {
     public class PeopleController : Controller
     {
-        private readonly ILogger<PeopleController> _logger;
-
-        public PeopleController(ILogger<PeopleController> logger)
+        private readonly AppDbContext dbContext;
+        private readonly IPeopleRepository _peopleRepository;
+        
+        public PeopleController(
+            AppDbContext context,
+            IPeopleRepository peopleRepository)
         {
-            _logger = logger;
+            dbContext = context;
+            _peopleRepository = peopleRepository;
         }
 
         public IActionResult Index()
         {
-            var dbContext = new AppDbContext();
-            var people = dbContext.People.ToList();
-            
+            var people = _peopleRepository.GetAll();
             return View(people);
         }
 
@@ -31,7 +35,6 @@ namespace UI_MVC.Controllers
         public IActionResult Add(Person model)
         {
             //var context = HttpContext.Request.Form;
-            var dbContext = new AppDbContext();
             dbContext.People.Add(model);
             dbContext.SaveChanges();
 
@@ -40,7 +43,6 @@ namespace UI_MVC.Controllers
 
         public IActionResult Edit(int id)
         {
-            var dbContext = new AppDbContext();
             var result = dbContext.People.Find(id);
 
             return View(result);
@@ -49,8 +51,7 @@ namespace UI_MVC.Controllers
         [HttpPost]
         public IActionResult Edit(Person model)
         {
-            var dbContext = new AppDbContext();
-            var result = dbContext.People.Find(model.Id);
+            var result = _peopleRepository.FindById(model.Id);
 
             result.FirstName = model.FirstName;
             result.LastName = model.LastName;
@@ -66,9 +67,7 @@ namespace UI_MVC.Controllers
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            var dbContext = new AppDbContext();
-            
-            var result = dbContext.People.Find(id);
+            var result = _peopleRepository.FindById(id);
 
             dbContext.People.Remove(result);
             
