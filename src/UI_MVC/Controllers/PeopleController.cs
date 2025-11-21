@@ -22,7 +22,8 @@ namespace UI_MVC.Controllers
         public IActionResult Index()
         {
             var people = _peopleRepository.GetAll();
-            return View(people);
+            var output = View(people);
+            return output;
         }
 
         //[HttpGet]

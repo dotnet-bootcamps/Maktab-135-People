@@ -11,11 +11,12 @@
 
         public async Task InvokeAsync(HttpContext context)
         {
-            if (DateTime.Now.Hour >= 10
-                && DateTime.Now.Hour < 11)
-                context.Response.WriteAsync("Bad Time");
+            //if (DateTime.Now.Hour >= 10
+            //    && DateTime.Now.Hour < 11)
+            //    context.Response.WriteAsync("Bad Time");
 
-            else await _next(context);
+            //else 
+                await _next(context);
         }
     }
 }

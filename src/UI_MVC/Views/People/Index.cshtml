@@ -1,11 +1,34 @@
-﻿@model List<UI_MVC.Models.Entities.Person>
+﻿@using Microsoft.CodeAnalysis.CSharp.Syntax
+@using Microsoft.Identity.Client
+@model List<UI_MVC.Models.Entities.Person>
 @{
+    Layout = "_Layout_People";
 }
+
+@{
+    var name = "hassan";
+    var i = 0;
+
+}
+
+
+@section innerRightMenu
+{
+    <ul>
+        <li>پرونده پرسنلی</li>
+        <li>ردیابی افراد</li>
+        <li>اطلاعات کاربری</li>
+    </ul>
+}
+
 
 <div class="row">
     <h1 class="col-6">
         لیست پرسنل
-    
+        @* @(2+2)
+        <br/>
+        @DateTime.Now *@
+
     </h1>
     <div class="col-6">
         <a class="btn btn-primary" asp-controller="People" asp-action="Add">جدید</a>
@@ -22,9 +45,43 @@
         <td>شهر</td>
         <td></td>
     </tr>
-    @foreach (var person in @Model)
+    
+    @*         <tr class="bg-warn">
+            <td>@person.Id</td>
+            <td>@person.FirstName</td>
+            <td>@person.LastName</td>
+            <td>@person.PhoneNumber</td>
+            <td>@person.CityName</td>
+
+            @if (@person.CityName.ToLower() == "shiraz")
+            {
+            <td class="bg-warning warning"></td>
+            }
+            else
+            {
+            <td>
+                <a asp-controller="People" asp-action="Edit" asp-route-id="@person.Id"
+                   class="btn btn-warning">ویرایش</a>
+
+                <form asp-controller="People" asp-action="Delete" method="post">
+                    <input type="hidden" name="id" value="@person.Id" />
+                    <input type="submit" value="حذف" class="btn btn-danger" />
+                </form>
+            </td>
+            }
+        </tr> *@
+    
+
+    @* @foreach (var person in @Model) *@
+    @* @for (i = 0; i < @Model.Count; i++) *@
+    @while (i < Model.Count)
     {
-        <tr>
+        <partial name="_Record" model="@Model[i]"/>
+        
+        {
+            i++;
+        }
+        @* <tr class="@(person.CityName.ToLower()=="shiraz" ? "warning":"")">
             <td>@person.Id</td>
             <td>@person.FirstName</td>
             <td>@person.LastName</td>
@@ -33,13 +90,13 @@
             <td>
                 <a asp-controller="People" asp-action="Edit" asp-route-id="@person.Id"
                    class="btn btn-warning">ویرایش</a>
-                
+
                 <form asp-controller="People" asp-action="Delete" method="post">
                     <input type="hidden" name="id" value="@person.Id" />
-                    <input type="submit" value="حذف" class="btn btn-danger"/>
+                    <input type="submit" value="حذف" class="btn btn-danger" />
                 </form>
 
             </td>
-        </tr>
+        </tr> *@
     }
 </table>

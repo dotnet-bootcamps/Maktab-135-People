@@ -1,0 +1,56 @@
+﻿@model UI_MVC.Models.Entities.Person
+@{
+
+    string translate(string cityName)
+    {
+        if (cityName.ToLower() == "isfehan")
+            return "اصفهان";
+        if (cityName.ToLower() == "ahvaz")
+            return "<span class=\"text-danger\">اهواز</span>";
+        return cityName;
+    }
+}
+
+
+<tr class="">
+    <td>@Model.Id</td>
+    <td>@Model.Id</td>
+    <td>@Model.FirstName</td>
+    <td>@Model.LastName</td>
+    <td>@Model.PhoneNumber</td>
+    <td>@Html.Raw(translate(Model.CityName))</td>
+            
+    @switch (@Model.CityName.ToLower())
+    {
+        case "shiraz":
+            <td class="bg-warning warning"></td>
+            break;
+        case "tehran":
+            <td class="bg-danger danger">
+                <a asp-controller="People" asp-action="Edit" asp-route-id="@Model.Id"
+                   class="btn btn-warning">ویرایش</a>
+
+                <form asp-controller="People" asp-action="Delete" method="post">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <input type="submit" value="حذف" class="btn btn-danger" />
+                </form>
+
+            </td>
+            break;
+        default:
+            <td>
+                <a asp-controller="People" asp-action="Edit" asp-route-id="@Model.Id"
+                   class="btn btn-warning">ویرایش</a>
+
+                <form asp-controller="People" asp-action="Delete" method="post">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <input type="submit" value="حذف" class="btn btn-danger" />
+                </form>
+
+            </td>
+            break;
+
+    }
+
+       
+</tr>
