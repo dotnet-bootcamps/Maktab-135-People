@@ -21,6 +21,9 @@ namespace UI_MVC.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.Title = "لیست افراد";
+            ViewData["Title"] = "لیست افراد";
+            TempData["Title"] = "Temp Data Value";
             var people = _peopleRepository.GetAll();
             var output = View(people);
             return output;
@@ -29,6 +32,8 @@ namespace UI_MVC.Controllers
         //[HttpGet]
         public IActionResult Add()
         {
+            var td = TempData["Title"];
+            TempData.Keep("Title");
             return View();
         }
         
@@ -45,6 +50,16 @@ namespace UI_MVC.Controllers
         public IActionResult Edit(int id)
         {
             var result = dbContext.People.Find(id);
+
+            ViewBag.Cities = new Dictionary<string, string>()
+            {
+            };
+            ViewData["Cities"] = new Dictionary<string, string>()
+            {
+            };
+            ViewBag.PersonType = "حقیقی";
+
+            // return RedirectToAction("Index");
 
             return View(result);
         }

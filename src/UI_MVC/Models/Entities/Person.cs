@@ -7,5 +7,6 @@
         public string LastName { get; set; }
         public string PhoneNumber { get; set; } = string.Empty;
         public string CityName { get; set; }
+        //public string CityId { get; set; }
     }
 }

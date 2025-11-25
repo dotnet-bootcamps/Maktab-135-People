@@ -1,13 +1,25 @@
 ﻿@using Microsoft.CodeAnalysis.CSharp.Syntax
 @using Microsoft.Identity.Client
+@using UI_MVC._Framework
+@using UI_MVC.Models.Database
+@using UI_MVC.Services
 @model List<UI_MVC.Models.Entities.Person>
+@inherits UI_MVC._Framework.BaseRazor<List<UI_MVC.Models.Entities.Person>>;
+@inject IHostEnvironment host;
+@inject IPeopleRepository repo;
+@inject AppDbContext dbContext;
+
 @{
     Layout = "_Layout_People";
+    ViewData["aaa"] = "aa";
+    
 }
 
 @{
     var name = "hassan";
     var i = 0;
+    
+
 
 }
 
@@ -15,6 +27,14 @@
 @section innerRightMenu
 {
     <ul>
+        @ViewBag.Title
+        <br />
+        @PageId
+        <br />
+        @host.EnvironmentName
+        <br />
+        @ViewData["Title"]
+        <br />
         <li>پرونده پرسنلی</li>
         <li>ردیابی افراد</li>
         <li>اطلاعات کاربری</li>

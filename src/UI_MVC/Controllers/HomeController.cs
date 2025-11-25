@@ -20,6 +20,7 @@ namespace UI_MVC.Controllers
 
         public IActionResult Index()
         {
+            ViewData["Title"] = "Home Page";
             var sum = _calculator.Sum(1, 2);
             return View(sum);
         }
