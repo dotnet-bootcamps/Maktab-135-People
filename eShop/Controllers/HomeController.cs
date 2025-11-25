@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using eShop.Model;
+using Microsoft.AspNetCore.Mvc;
 
 namespace eShop.Controllers
 {
@@ -6,6 +7,7 @@ namespace eShop.Controllers
     {
         public IActionResult Index()
         {
+            new Service1().Calculate(0);
             return View();
         }
 

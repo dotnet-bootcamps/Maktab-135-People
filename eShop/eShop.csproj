@@ -12,7 +12,6 @@
     <Folder Include="Areas\Panel\Views\" />
     <Folder Include="Areas\Identity\Data\" />
     <Folder Include="Areas\Identity\Models\" />
-    <Folder Include="Model\" />
   </ItemGroup>
 
   <ItemGroup>
