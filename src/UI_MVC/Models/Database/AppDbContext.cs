@@ -10,5 +10,10 @@ namespace UI_MVC.Models.Database
         }
         
         public DbSet<Person> People { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

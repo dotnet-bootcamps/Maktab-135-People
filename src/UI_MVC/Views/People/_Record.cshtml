@@ -14,11 +14,11 @@
 
 <tr class="">
     <td>@Model.Id</td>
-    <td>@Model.Id</td>
     <td>@Model.FirstName</td>
     <td>@Model.LastName</td>
     <td>@Model.PhoneNumber</td>
     <td>@Html.Raw(translate(Model.CityName))</td>
+    <td>@Model.Age</td>
             
     @switch (@Model.CityName.ToLower())
     {

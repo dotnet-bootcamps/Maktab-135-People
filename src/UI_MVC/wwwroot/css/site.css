@@ -34,3 +34,8 @@ body {
 .bg-warn td{
     background-color:yellow
 }
+
+
+.err{
+    color:red
+}

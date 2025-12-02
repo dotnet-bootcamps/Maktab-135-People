@@ -34,15 +34,41 @@ namespace UI_MVC.Controllers
         {
             var td = TempData["Title"];
             TempData.Keep("Title");
-            return View();
+
+            var model = new Person();
+            model.Age = -24;
+            return View(model);
         }
         
         [HttpPost]
         public IActionResult Add(Person model)
         {
+            if (ModelState.IsValid == false)
+            {
+                return View();
+            }
+
             //var context = HttpContext.Request.Form;
+            
+            try
+            {
+                /*
+                 *
+                 *
+                 *
+                 *
+                 *
+                 */
+                //throw new Exception("new exception");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("","خطا در عملیات");
+                return View(model);
+            }
+
             dbContext.People.Add(model);
-            dbContext.SaveChanges();
+            dbContext.SaveChanges(); // Validation
 
             return RedirectToAction("Index");
         }
