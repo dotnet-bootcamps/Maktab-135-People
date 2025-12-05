@@ -10,13 +10,16 @@ namespace UI_MVC.Controllers
     {
         private readonly AppDbContext dbContext;
         private readonly IPeopleRepository _peopleRepository;
-        
+        private readonly ILogger<PeopleController> _logger;
+
         public PeopleController(
             AppDbContext context,
-            IPeopleRepository peopleRepository)
+            IPeopleRepository peopleRepository,
+            ILogger<PeopleController> logger)
         {
             dbContext = context;
             _peopleRepository = peopleRepository;
+            _logger = logger;
         }
 
         public IActionResult Index()
@@ -25,6 +28,14 @@ namespace UI_MVC.Controllers
             ViewData["Title"] = "لیست افراد";
             TempData["Title"] = "Temp Data Value";
             var people = _peopleRepository.GetAll();
+
+            _logger.LogTrace("Error 1");
+            _logger.LogDebug("Error 1");
+            _logger.LogInformation("Error 1");
+            _logger.LogWarning("Error 1");
+            _logger.LogError("Error 1");
+            _logger.LogCritical("Error 1");
+
             var output = View(people);
             return output;
         }

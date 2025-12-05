@@ -4,8 +4,7 @@
     {
         private readonly RequestDelegate _next;
         private readonly ILogger<LoggingMiddleware> _logger;
-
-
+        
         public LoggingMiddleware(RequestDelegate next, ILogger<LoggingMiddleware> logger)
         {
             _next = next;
@@ -17,13 +16,11 @@
             /*Before*/
             var startTime = DateTime.Now;
             _logger.LogInformation($"**** Request Started --- {startTime} --- {context.Request.Path} ***");
-
-
+            
             context.Response.Headers.Add("Name","Salam");
 
             await _next(context);
-
-
+            
             /*After*/
             var endTime = DateTime.Now;
             var duration = endTime-startTime;

@@ -1,10 +1,24 @@
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using UI_MVC.Middlwares;
 using UI_MVC.Models.Database;
 using UI_MVC.Services;
 
 // Add services to the container.
 var builder = WebApplication.CreateBuilder(args);
+
+//Log.Logger = new LoggerConfiguration()
+//    .MinimumLevel.Debug()
+//    .WriteTo.Console()
+//    .CreateLogger();
+
+
+builder.Host.UseSerilog((context, configuration) =>
+{
+    configuration.ReadFrom.Configuration(context.Configuration);
+});
+
+
 
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddScoped<IPeopleRepository, PeopleRepository>();
