@@ -45,7 +45,7 @@ namespace UI_MVC.Controllers
         {
             if (ModelState.IsValid == false)
             {
-                return View();
+                return View(model);
             }
 
             //var context = HttpContext.Request.Form;
