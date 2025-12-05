@@ -42,8 +42,9 @@ builder.Services.AddDbContext<AppDbContext>(optionsBuilder =>
 
 // Configure the HTTP request pipeline.
 var app = builder.Build();
-app.UseMiddleware<LoggingMiddleware>();
-app.UseMiddleware<IpCheckerMiddleware>();
+app.UseMiddleware<RequestLoggingMiddleware>();
+//app.UseMiddleware<LoggingMiddleware>();
+//app.UseMiddleware<IpCheckerMiddleware>();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
