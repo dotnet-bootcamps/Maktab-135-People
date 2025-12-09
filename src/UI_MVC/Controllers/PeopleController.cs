@@ -1,11 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using UI_MVC._Framework;
 using UI_MVC.Models.Database;
 using UI_MVC.Models.Entities;
 using UI_MVC.Services;
 
 namespace UI_MVC.Controllers
 {
+    [Authorize]
     public class PeopleController : Controller
     {
         private readonly AppDbContext dbContext;
@@ -21,6 +25,8 @@ namespace UI_MVC.Controllers
             _peopleRepository = peopleRepository;
             _logger = logger;
         }
+
+
 
         public IActionResult Index()
         {
@@ -38,6 +44,8 @@ namespace UI_MVC.Controllers
 
             var output = View(people);
             return output;
+
+            
         }
 
         //[HttpGet]

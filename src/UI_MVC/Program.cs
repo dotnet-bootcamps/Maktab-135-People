@@ -3,9 +3,12 @@ using Serilog;
 using UI_MVC.Middlwares;
 using UI_MVC.Models.Database;
 using UI_MVC.Services;
+using Microsoft.AspNetCore.Identity;
 
 // Add services to the container.
 var builder = WebApplication.CreateBuilder(args);
+var connectionString =
+    "Data Source=(localdb)\\MSSQLLocalDB; Initial Catalog=Maktab_PeopleDb; Integrated Security=True;";
 
 //Log.Logger = new LoggerConfiguration()
 //    .MinimumLevel.Debug()
@@ -36,12 +39,15 @@ else
 builder.Services.AddDbContext<AppDbContext>(optionsBuilder =>
     optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB; Initial Catalog=Maktab_PeopleDb; Integrated Security=True;"));
 
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<AppDbContext>();
+
 
 
 
 
 // Configure the HTTP request pipeline.
 var app = builder.Build();
+
 app.UseMiddleware<RequestLoggingMiddleware>();
 //app.UseMiddleware<LoggingMiddleware>();
 //app.UseMiddleware<IpCheckerMiddleware>();
@@ -52,20 +58,23 @@ if (!app.Environment.IsDevelopment())
 }
 app.UseHttpsRedirection();
 app.UseRouting();
-//app.UseAuthorization();
+app.UseAuthorization();
 app.MapStaticAssets();
 
-//app.UseEndpoints(endpoints =>
-//{
-//    endpoints.MapControllerRoute(
-//        name: "areas",
-//        pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
-//    );
-//});
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "areas",
+        pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+    );
+});
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
+    .WithStaticAssets();
+
+app.MapRazorPages()
     .WithStaticAssets();
 
 
