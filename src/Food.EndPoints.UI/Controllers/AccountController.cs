@@ -1,4 +1,5 @@
 ﻿using Food.EndPoints.UI.Models.Account;
+using Food.Infra.Data.Db.SqlServer.IdentityEntities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,12 +7,12 @@ namespace Food.EndPoints.UI.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly SignInManager<IdentityUser<int>> _signInManager;
-        private readonly UserManager<IdentityUser<int>> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
+        private readonly UserManager<AppUser> _userManager;
 
         public AccountController(
-            SignInManager<IdentityUser<int>> signInManager,
-            UserManager<IdentityUser<int>> userManager)
+            SignInManager<AppUser> signInManager,
+            UserManager<AppUser> userManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -53,11 +54,12 @@ namespace Food.EndPoints.UI.Controllers
             {
                 return View(model);
             }
-            var user = new IdentityUser<int>
+            var user = new AppUser
             {
                 UserName = model.Email,
                 Email = model.Email,
                 PhoneNumber = model.PhoneNumber,
+                NationalCode = model.NationalCode
             }; 
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)

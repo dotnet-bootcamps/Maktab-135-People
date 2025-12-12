@@ -1,4 +1,5 @@
 using Food.Infra.Data.Db.SqlServer;
+using Food.Infra.Data.Db.SqlServer.IdentityEntities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,7 +19,7 @@ builder.Services.AddDbContext<UsersDbContext>(optionsBuilder =>
 
 
 // Identity Configuration
-builder.Services.AddIdentity<IdentityUser<int>, IdentityRole<int>>(option =>
+builder.Services.AddIdentity<AppUser, IdentityRole<int>>(option =>
         {
             // Password Settings
             option.Password.RequireDigit = false;

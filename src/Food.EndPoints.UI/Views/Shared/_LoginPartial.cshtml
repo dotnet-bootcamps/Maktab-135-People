@@ -1,7 +1,8 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@using Food.Infra.Data.Db.SqlServer.IdentityEntities
+@using Microsoft.AspNetCore.Identity
 
-@inject SignInManager<IdentityUser<int>> SignInManager
-@inject UserManager<IdentityUser<int>> UserManager
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
 
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))

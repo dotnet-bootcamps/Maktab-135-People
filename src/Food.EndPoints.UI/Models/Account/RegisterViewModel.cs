@@ -15,6 +15,9 @@ public class RegisterViewModel
     //[Phone(ErrorMessage = "لطفا یک شماره همراه معتبر وارد کنید.")]
     public string PhoneNumber { get; set; }
 
+    [Display(Name = "کد ملی")]
+    public string NationalCode { get; set; }
+
     [Display(Name = "رمز عبور")]
     [Required(ErrorMessage = "لطفا رمز عبور خود را وارد کنید.")]
     [MinLength(7, ErrorMessage = "رمز عبور باید حداقل 7 کاراکتر باشد.")]

@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Food.Infra.Data.Db.SqlServer.IdentityEntities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Food.Infra.Data.Db.SqlServer;
 
-public class UsersDbContext : IdentityDbContext<IdentityUser<int>, IdentityRole<int>, int>
+public class UsersDbContext : IdentityDbContext<AppUser, IdentityRole<int>, int>
 {
     public UsersDbContext(DbContextOptions<UsersDbContext> options)
         : base(options)
