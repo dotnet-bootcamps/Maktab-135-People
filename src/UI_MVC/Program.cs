@@ -1,3 +1,4 @@
+using Framework.Maktab.Web;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using UI_MVC.Middlwares;
@@ -14,6 +15,8 @@ var connectionString =
 //    .MinimumLevel.Debug()
 //    .WriteTo.Console()
 //    .CreateLogger();
+
+builder.Services.AddMyServices();
 
 
 builder.Host.UseSerilog((context, configuration) =>
@@ -47,6 +50,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 
 // Configure the HTTP request pipeline.
 var app = builder.Build();
+app.UseMiddlewares();
 
 app.UseMiddleware<RequestLoggingMiddleware>();
 //app.UseMiddleware<LoggingMiddleware>();

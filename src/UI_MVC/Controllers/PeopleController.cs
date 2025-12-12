@@ -60,6 +60,8 @@ namespace UI_MVC.Controllers
         }
         
         [HttpPost]
+        // Model Binding
+
         public IActionResult Add(Person model)
         {
             if (ModelState.IsValid == false)
